@@ -2,16 +2,16 @@ var Waterline = require('waterline');
 var sailsDiskAdapter = require('sails-mongo');
 var waterline = new Waterline();
 var entitys = require('./models');
-var mongo = require('./mongo.js')
-var mysql = require('./mysql.js')
-var postgres = require('./postgres.js')
+var mongo = require('./mongo.js');
+var mysql = require('./mysql.js');
+var postgres = require('./postgres.js');
 
 function connect(config) {
     return new Promise(function(resolve, reject) {
         for(var i = 0; i < entitys.length; i++){
             var collection = Waterline.Collection.extend(entitys[i]);
             waterline.registerModel(collection);
-            collection = null
+            collection = null;
         }
 
         let configuration;
@@ -32,13 +32,11 @@ function connect(config) {
                 console.error(err);
                 reject(err);
             }
-           // console.log(ontology.collections.user)
             resolve(ontology.collections);
         })
     })
-
 }
 
-module.exports = () => connect
+module.exports = () => connect;
     
 

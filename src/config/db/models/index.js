@@ -18,18 +18,18 @@ const basics = {
 module.exports = [
     {
         identity: 'user',
-	    datastore: 'default',
+        datastore: 'default',
         shema: true,
         autoPK: false,
         primaryKey: 'id',
-	    attributes: {
+        attributes: {
             ...basics,
             first_name: { 
                 type: 'string'
             },
-		    last_name: {
+            last_name: {
                 type: 'string'
             },
-	    }
+        }
     }
-]
+];

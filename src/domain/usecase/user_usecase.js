@@ -2,11 +2,11 @@ var userRepostory = require('../../data/repository/user_repository.js')
 
 module.exports = {
     get: (DB) => {
-        return userRepostory.get(DB) 
+        return userRepostory.get(DB);
     },
 
     getByID: (DB, id) => {
-        return userRepostory.getByID(DB, id)
+        return userRepostory.getByID(DB, id);
     },
 
     create: (DB, params) => {
@@ -20,4 +20,4 @@ module.exports = {
     delete: async (DB, id) => {
         return userRepostory.delete(DB, id);
     }
-}
+};

@@ -14,4 +14,4 @@ module.exports = ({name, user, password, host, port}) => ({
         }
     }
 
-})
+});

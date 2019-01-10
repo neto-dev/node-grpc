@@ -1,5 +1,5 @@
-import responses from '../../utils/responses.js'
-var userUsecase = require('../../domain/usecase/user_usecase.js')
+import responses from '../../utils/responses.js';
+var userUsecase = require('../../domain/usecase/user_usecase.js');
 const grpc = require('grpc');
 var protoLoader = require("@grpc/proto-loader");
 const userProto = grpc.loadPackageDefinition(
@@ -15,48 +15,51 @@ const userProto = grpc.loadPackageDefinition(
 module.exports = (server, DB) => {
     server.addService(userProto.users.UserService.service, {
        Get(call, callback) {
+           console.log("New Get Request");
             userUsecase.get(DB)
             .then((data) => {
-                callback(null, {user:data})
+                callback(null, {user:data});
             }).catch((err) => {
                 callback({message: err.message, code: 500}, null);
-            })
+            });
        },
        GetByID(call, callback) {
+           console.log("New GetByID Request", call.request);
             userUsecase.getByID(DB, call.request.id)
             .then((data) => {
-                console.log("Esto es la data:", data);
-                callback(null, data)
+                callback(null, data);
             }).catch((err) => {
                 callback({message: err.message, code: 500}, null);
-            })
+            });
        }, 
        Create(call, callback) {
+           console.log("New Create Request");
             userUsecase.create(DB, call.request)
             .then((data) => {
-                callback(null, data)
+                callback(null, data);
             }).catch((err) => {
                 callback({message: err.message, code: 500}, null);
-            })
+            });
        }, 
        Update(call, callback) {
+           console.log("New Update Request", call.request);
             userUsecase.update(DB, call.request.id, call.request)
             .then((data) => {
-                callback(null, data)
+                callback(null, data);
             }).catch((err) => {
                 callback({message: err.message, code: 500}, null);
-            })
+            });
        }, 
        Delete(call, callback) {
-           console.log("Lo que llega >>>>> ", call.request.id)
+           console.log("New Delete Request", call.request);
             userUsecase.delete(DB, call.request.id)
             .then((data) => {
-                callback(null, data)
+                callback(null, data);
             }).catch((err) => {
                 callback({message: err.message, code: 500}, null);
-            })
+            });
        }, 
-    })
+    });
 
 //En caso de que se desee implementar api rest los siguientes metodos son los que funcionan con express
 //    get: function (server, DB) {
@@ -122,4 +125,4 @@ module.exports = (server, DB) => {
 //        this.update(app, DB);
 //    }
     
-}
+};
